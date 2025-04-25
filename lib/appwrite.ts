@@ -28,7 +28,7 @@ export async function login() {
     );
 
     if (!response) {
-      throw new Error("Failed to login bro");
+      throw new Error("Create OAuth2 token failed");
     }
 
     const browserResult = await openAuthSessionAsync(
@@ -37,21 +37,21 @@ export async function login() {
     );
 
     if (browserResult.type !== "success") {
-      throw new Error("Failed to login bro");
+      throw new Error("Create OAuth2 token failed");
     }
 
     const url = new URL(browserResult.url);
     const secret = url.searchParams.get("secret")?.toString();
-    const userId = url.searchParams.get("userid")?.toString();
+    const userId = url.searchParams.get("userId")?.toString();
 
     if (!secret || !userId) {
-      throw new Error("Failed to login bro");
+      throw new Error("Create OAuth2 token failed");
     }
 
     const session = await account.createSession(userId, secret);
 
     if (!session) {
-      throw new Error("Failed to create a session :sob");
+      throw new Error("Failed to create session");
     }
 
     return true;
@@ -71,7 +71,7 @@ export async function logout() {
   }
 }
 
-export async function getUser() {
+export async function getCurrentUser() {
   try {
     const response = await account.get();
 
