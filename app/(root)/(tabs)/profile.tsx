@@ -4,7 +4,6 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Settings,
   ImageSourcePropType,
   Alert,
 } from "react-native";
